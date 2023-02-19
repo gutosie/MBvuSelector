@@ -1,4 +1,4 @@
-# neoscript
+# MBvu-script
 #Executor script
 
 #Installation of neoscript. Run the following command in the terminal of tuner
