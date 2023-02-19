@@ -15,9 +15,12 @@ from Tools.Directories import fileExists, SCOPE_PLUGINS
 from Screens.MessageBox import MessageBox
 from Plugins.Extensions.MBvu.getinfo import getIMGmb, getIMGmbHddUsb, getCurrent, dirMB, dirIscripts, dirscripts, namber, getMovNextIMG, getHddOrUsb, getMountDevices, getS0, GetTranslator
 
-PLUGINVERSION=open('/usr/lib/enigma2/python/Plugins/Extensions/MBvu/mbvuver').read().strip().upper()
-mbvuver=open('/tmp/imbvuver').read().strip().upper()           
+PLUGINVERSION=open('/usr/lib/enigma2/python/Plugins/Extensions/MBvu/mbvuver').read().strip().upper()           
 autoupdateplug = 'https://raw.githubusercontent.com/gutosie/MBvuSelector/master/imbvuver;'
+try:
+    mbvuver=open('/tmp/imbvuver').read().strip().upper()
+except:
+    mbvuver=PLUGINVERSION
 
 class ScriptNeo(Screen):
         skin = """
