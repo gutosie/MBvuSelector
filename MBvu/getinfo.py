@@ -250,7 +250,7 @@ def getMountDevices():
             os.system('mount /dev/sdb1 /media/usb')
 
 def getMovNextIMG():
-    if fileExists('/boot/linuxrootfs9/zImage') and not fileExists(''+getHddOrUsb()+'/linuxrootfs9) :
+    if fileExists('/boot/linuxrootfs9/zImage') and not fileExists(''+getHddOrUsb()+'/linuxrootfs9') :
         os.system('mv -f /boot/linuxrootfs9 '+getHddOrUsb()+'; sleep 1; ')
     if fileExists(''+getHddOrUsb()+'/linuxrootfs9/zImage'):
         if not fileExists(''+getHddOrUsb()+'/linuxrootfs10/zImage'):
