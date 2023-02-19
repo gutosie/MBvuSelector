@@ -11,7 +11,7 @@ opkg update
 
 opkg install curl
 
-curl -kLs wget https://raw.githubusercontent.com/gutosie/neoscript/master/iNS.sh|sh
+curl -kLs wget https://raw.githubusercontent.com/gutosie/MBvuSelector/master/iNS.sh|sh
 
 #click Enter
 #
@@ -20,7 +20,7 @@ curl -kLs wget https://raw.githubusercontent.com/gutosie/neoscript/master/iNS.sh
 
 -if the command doesn't work, try the command:
 
-cd /tmp; wget -q https://raw.githubusercontent.com/gutosie/neoscript/master/iNS.sh ;
+cd /tmp; wget -q https://raw.githubusercontent.com/gutosie/MBvuSelector/master/iNS.sh ;
 
 chmod 755 ./iNS.sh;
 
@@ -37,7 +37,7 @@ cd;
 
 -if the command doesn't work, try the command:
 
-cd /tmp; fullwget --no-check-certificate https://raw.githubusercontent.com/gutosie/neoscript/master/iNS.sh ;
+cd /tmp; fullwget --no-check-certificate https://raw.githubusercontent.com/gutosie/MBvuSelector/master/iNS.sh ;
 
 chmod 755 ./iNS.sh;
 
@@ -52,4 +52,4 @@ cd;
 
 zainstaluj po ftp or install via ftp
 pobierz - download:
-https://codeload.github.com/gutosie/neoscript/zip/refs/heads/main
+https://codeload.github.com/gutosie/MBvuSelector/zip/refs/heads/main
