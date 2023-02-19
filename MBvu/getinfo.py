@@ -126,17 +126,17 @@ def getIMGmb():
         
 def getCurrent():
     try:
-        slot1 = ""
+        slotX = ""
         if fileExists('/boot/STARTUP'):
             with open('/boot/STARTUP', 'r') as f:
                 lines = f.read()
                 f.close()
             if lines.find(''+getROOT()+'') != -1 and not lines.find(''+namberout+'') :
                 if GetTranslator() == 'pl_PL':
-                    slot0 = '---[Aktualny]'
+                    slotX = '---[Aktualny]'
                 else:
-                    slot0 = '____'+GetTranslator()+''
-        return slot1
+                    slotX = '____'+GetTranslator()+''
+        return slotX
     except:
         pass
 
