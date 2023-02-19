@@ -28,19 +28,19 @@ fi
     #pobieranie i instalowanie
     if [ -f /usr/bin/curl ] ; then    
         curl -kLs $URL -o /tmp/MBvuSelector.zip
-        #curl -O --ftp-ssl https://raw.githubusercontent.com/gutosie/MBvuSelector/master/imbvuver
+        curl -O --ftp-ssl https://raw.githubusercontent.com/gutosie/MBvuSelector/master/imbvuver
     fi
     if [ ! -e /tmp/MBvuSelector.zip ] ; then
         if [ -f /usr/bin/wget ]; then 
            wget --no-check-certificate $URL
-           #wget -q --no-check-certificate https://raw.githubusercontent.com/gutosie/MBvuSelector/master/imbvuver
+           wget -q --no-check-certificate https://raw.githubusercontent.com/gutosie/MBvuSelector/master/imbvuver
            $MVmain
         fi
     fi
     if [ ! -e /tmp/neoscript.zip ] ; then    
         if [ -f /usr/bin/fullwget ]; then 
            fullwget --no-check-certificate $URL
-           #fullwget -q --no-check-certificate https://raw.githubusercontent.com/gutosie/MBvuSelector/master/imbvuver
+           fullwget -q --no-check-certificate https://raw.githubusercontent.com/gutosie/MBvuSelector/master/imbvuver
            $MVmain
         fi           
     fi    
