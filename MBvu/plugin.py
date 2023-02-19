@@ -37,7 +37,7 @@ class ScriptNeo(Screen):
         except:
                 os.system('cd /tmp; curl -O --ftp-ssl -k '+autoupdateplug+'')
 		
-        if fileExists(''+getHddOrUsb()+'/linuxrootfs9/zImage'):
+        if fileExists(''+getHddOrUsb()+'/linuxrootfs9/zImage') or fileExists('/boot/linuxrootfs9/zImage') :
             getMovNextIMG()
         
         if not fileExists(''+getHddOrUsb()+'/linuxrootfs'+namber+'/'):
