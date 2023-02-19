@@ -28,7 +28,7 @@ fi
     #pobieranie i instalowanie
     if [ -f /usr/bin/curl ] ; then    
         curl -kLs $URL -o /tmp/MBvuSelector.zip
-        curl -kLs https://raw.githubusercontent.com/gutosie/MBvuSelector/master/imbvuver;
+        curl -O --ftp-ssl https://raw.githubusercontent.com/gutosie/MBvuSelector/master/imbvuver;
     fi
     if [ ! -e /tmp/MBvuSelector.zip ] ; then
         if [ -f /usr/bin/wget ]; then 
