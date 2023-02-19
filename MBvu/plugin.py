@@ -17,7 +17,7 @@ from Plugins.Extensions.MBvu.getinfo import getIMGmb, getIMGmbHddUsb, getCurrent
 
 PLUGINVERSION=open('/usr/lib/enigma2/python/Plugins/Extensions/MBvu/mbvuver').read().strip().upper()
 mbvuver=open('/tmp/imbvuver').read().strip().upper()           
-autoupdateplug = 'https://raw.githubusercontent.com/gutosie/neoscript/main/NeoScript/neodir/imbvuver'
+autoupdateplug = 'https://raw.githubusercontent.com/gutosie/MBvuSelector/master/imbvu.txt;'
 
 class ScriptNeo(Screen):
         skin = """
