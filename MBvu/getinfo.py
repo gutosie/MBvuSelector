@@ -53,7 +53,11 @@ def getS0():
                 lines = f.read()
                 f.close()
             if lines.find('linuxrootfs0') != -1:
-                slot0 = '____'+GetTranslator()+''
+                if GetTranslator() == 'pl_PL':
+                    slot0 = '---[Aktualny]'
+                else:
+                    slot0 = '____'+GetTranslator()+''
+                    
         return slot0
     except:
         pass
@@ -128,7 +132,10 @@ def getCurrent():
                 lines = f.read()
                 f.close()
             if lines.find(''+getROOT()+'') != -1 and not lines.find(''+namberout+'') :
-                slot1 = '____'+GetTranslator()+''
+                if GetTranslator() == 'pl_PL':
+                    slot0 = '---[Aktualny]'
+                else:
+                    slot0 = '____'+GetTranslator()+''
         return slot1
     except:
         pass
@@ -199,9 +206,9 @@ def GetTranslator():
     lang = 'config.osd.language=pl_PL'
     local = usedlang.read().find(lang)
     if local != -1:
-        imglang = 'Aktualny'
+        imglang = 'pl_PL'
     else:
-        imglang = 'Current'
+        imglang = '---Current'
     return imglang
 
 def getHddOrUsb():

@@ -13,7 +13,7 @@ import sys
 from os import system
 from Tools.Directories import fileExists, SCOPE_PLUGINS
 from Screens.MessageBox import MessageBox
-from Plugins.Extensions.MBvu.getinfo import getIMGmb, getIMGmbHddUsb, getCurrent, dirMB, dirIscripts, dirscripts, namber, getMovNextIMG, getHddOrUsb, getMountDevices, getS0
+from Plugins.Extensions.MBvu.getinfo import getIMGmb, getIMGmbHddUsb, getCurrent, dirMB, dirIscripts, dirscripts, namber, getMovNextIMG, getHddOrUsb, getMountDevices, getS0, GetTranslator
 
 PLUGINVERSION=open('/usr/lib/enigma2/python/Plugins/Extensions/MBvu/mbvuver').read().strip().upper()
 mbvuver=open('/tmp/imbvuver').read().strip().upper()           
@@ -44,8 +44,11 @@ class ScriptNeo(Screen):
                 os.system('rm -r '+dirscripts+'/*.sh; sleep 2; mv '+dirIscripts+'/* '+dirscripts+'/; sleep 2  ')
         elif fileExists(''+dirIscripts+'') and not fileExists(''+dirscripts+''):
                 os.system('mv -f '+dirIscripts+' '+dirscripts+'; sleep 2  ')
-        
-        os.system('mv -f ' + dirscripts + '/0_Slot0*.sh ' + dirscripts + '/0_Slot0-Recovery%s.sh' % getS0() )
+                
+        if GetTranslator() == 'pl_PL':
+                os.system('mv -f ' + dirscripts + '/_SlotR*.sh ' + dirscripts + '/_SlotR-Tryb_awaryjny%s.sh' % getS0() )
+        else:
+                os.system('mv -f ' + dirscripts + '/_SlotR*.sh ' + dirscripts + '/_SlotR-Recovery%s.sh' % getS0() )
         os.system('echo "linuxrootfs1" > /tmp/linuxrootfs')
         os.system('mv -f ' + dirscripts + '/1_Slot1*.sh ' + dirscripts + '/1_Slot1-'+getIMGmb()+'%s.sh' % getCurrent() )
         os.system('echo "linuxrootfs2" > /tmp/linuxrootfs') 
@@ -108,9 +111,27 @@ class ScriptNeo(Screen):
                 
         def loadScriptList(self):
                 if fileExists('/tmp/imbvuver') and PLUGINVERSION != mbvuver:
+                    if GetTranslator() == 'pl_PL':
+                        os.system('mv -f '+dirscripts+'/_Update_Plugin '+dirscripts+'/_Aktualizacja.sh')
+                    else:
                         os.system('mv -f '+dirscripts+'/_Update_Plugin '+dirscripts+'/_Update_Plugin.sh')
                 else:
+                    if GetTranslator() == 'pl_PL':
+                        os.system('mv -f '+dirscripts+'/_Aktualizacja.sh '+dirscripts+'/_Update_Plugin')
+                    else:
                         os.system('mv -f '+dirscripts+'/_Update_Plugin.sh '+dirscripts+'/_Update_Plugin')
+                        
+                if fileExists(''+dirscripts+'/_Copying_plugin_to_other_image.sh') and GetTranslator() == 'pl_PL':
+                        os.system('mv -f '+dirscripts+'/_Copying_plugin_to_other_image.sh '+dirscripts+'/_Kopiowanie_wtyczki_do_innych_image.sh')
+                if fileExists(''+dirscripts+'/_Add_Slots.sh') and GetTranslator() == 'pl_PL':
+                        os.system('mv -f '+dirscripts+'/_Add_Slots.sh '+dirscripts+'/_Dodaj_Slot.sh')
+                else:
+                    if fileExists('' + dirscripts + '/Slot20.sh') or fileExists('' + dirscripts + '/Slot20-empty_Slot.sh'):
+                        try:
+                            os.system('rm -f '+dirscripts+'/_Dodaj_Slot.sh')
+                        except:
+                            os.system('rm -f '+dirscripts+'/_Add_Next_Slots.sh')
+                                
                         
                 try:
                         list = listdir("/usr/lib/enigma2/python/Plugins/Extensions/MBvu/script/")
