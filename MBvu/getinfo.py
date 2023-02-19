@@ -250,8 +250,8 @@ def getMountDevices():
             os.system('mount /dev/sdb1 /media/usb')
 
 def getMovNextIMG():
-    if fileExists('/boot/linuxrootfs9/zImage'):
-        os.system('mv -f /linuxrootfs9 '+getHddOrUsb()+'/linuxrootfs9; sleep 1; ')
+    if fileExists('/boot/linuxrootfs9/zImage') and not fileExists(''+getHddOrUsb()+'/linuxrootfs9) :
+        os.system('mv -f /boot/linuxrootfs9 '+getHddOrUsb()+'; sleep 1; ')
     if fileExists(''+getHddOrUsb()+'/linuxrootfs9/zImage'):
         if not fileExists(''+getHddOrUsb()+'/linuxrootfs10/zImage'):
             os.system('mv -f '+getHddOrUsb()+'/linuxrootfs9 '+getHddOrUsb()+'/linuxrootfs10; sleep 1; echo "kernel=/linuxrootfs10/zImage root=/dev/sda1 rootsubdir=linuxrootfs10" > /boot/STARTUP; sleep 1 ')
