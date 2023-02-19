@@ -27,12 +27,12 @@ class ScriptNeo(Screen):
           </widget>
 	</screen>""" % (_(''+PLUGINVERSION+''))
 	
+        if fileExists('/tmp/imbvuver'):
+                        os.system('rm -r /tmp/imbvuve*')
         try:
-                if fileExists('/tmp/imbvuver'):
-                        os.system('rm -r /tmp/imbvuver')
-                os.system('cd /tmp; wget -q --no-check-certificate '+autoupdateplug+' ')
+                os.system('cd /tmp; wget -q --no-check-certificate '+autoupdateplug+'')
         except:
-                os.system('cd /tmp; curl -O --ftp-ssl -k '+autoupdateplug+' ')
+                os.system('cd /tmp; curl -O --ftp-ssl -k '+autoupdateplug+'')
 		
         if fileExists(''+getHddOrUsb()+'/linuxrootfs9/zImage'):
             getMovNextIMG()
