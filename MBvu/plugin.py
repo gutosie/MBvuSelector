@@ -45,7 +45,7 @@ class ScriptNeo(Screen):
         elif fileExists(''+dirIscripts+'') and not fileExists(''+dirscripts+''):
                 os.system('mv -f '+dirIscripts+' '+dirscripts+'; sleep 2  ')
         
-        os.system('mv -f ' + dirscripts + '/0_Slot0*.sh ' + dirscripts + '/0_Slot'R'-'+getIMGmb()+'%s.sh' % getS0() )
+        os.system('mv -f ' + dirscripts + '/0_Slot0*.sh ' + dirscripts + '/0_Slot0-Recovery%s.sh' % getS0() )
         os.system('echo "linuxrootfs1" > /tmp/linuxrootfs')
         os.system('mv -f ' + dirscripts + '/1_Slot1*.sh ' + dirscripts + '/1_Slot1-'+getIMGmb()+'%s.sh' % getCurrent() )
         os.system('echo "linuxrootfs2" > /tmp/linuxrootfs') 
