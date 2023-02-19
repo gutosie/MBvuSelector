@@ -10,6 +10,7 @@ dirMB='/usr/lib/enigma2/python/Plugins/Extensions/MBvu'
 dirscripts='/usr/lib/enigma2/python/Plugins/Extensions/MBvu/script'
 dirIscripts='/usr/lib/enigma2/python/Plugins/Extensions/MBvu/iscript'
 namber='4' or '5' or '6' or '7' or '8' or '9' or '10' or '11' or '12' or '13' or '14' or '15' or '16' or '17' or '18' or '19' or '20' #itd.. add
+namberto='4' or '5' or '6' or '7' or '8' or '9' 
 namberout = '10' or '11' or '12' or '13' or '14' or '15' or '16' or '17' or '18' or '19' or '20' 
 
 def getROOT():
@@ -131,7 +132,7 @@ def getCurrentToNine():
             with open('/boot/STARTUP', 'r') as f:
                 lines = f.read()
                 f.close()
-            if lines.find(''+getROOT()+'') != -1:
+            if lines.find(''+getROOT()+'') != -1 and not lines.find(''+namberout+'') != -1:
                 if GetTranslator() == 'pl_PL':
                     slotX = '---[Aktualny]'
                 else:
