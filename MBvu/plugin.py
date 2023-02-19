@@ -30,8 +30,8 @@ class ScriptNeo(Screen):
           </widget>
 	</screen>""" % (_(''+PLUGINVERSION+''))
 	
-        if fileExists('/tmp/imbvuver'):
-                        os.system('rm -r /tmp/imbvuve*')
+        #if fileExists('/tmp/imbvuver'):
+                        #os.system('rm -r /tmp/imbvuve*')
         try:
                 os.system('cd /tmp; wget -q --no-check-certificate '+autoupdateplug+'')
         except:
@@ -114,19 +114,19 @@ class ScriptNeo(Screen):
                 
         def loadScriptList(self):
                 if fileExists('/tmp/imbvuver') and PLUGINVERSION != mbvuver:
-                    if GetTranslator() == 'pl_PL':
+                    if GetTranslator() == 'pl_PL' and fileExists('/STARTUP'):
                         os.system('mv -f '+dirscripts+'/_Update_Plugin '+dirscripts+'/_Aktualizacja.sh')
                     else:
                         os.system('mv -f '+dirscripts+'/_Update_Plugin '+dirscripts+'/_Update_Plugin.sh')
                 else:
-                    if GetTranslator() == 'pl_PL':
+                    if GetTranslator() == 'pl_PL' and fileExists('/STARTUP'):
                         os.system('mv -f '+dirscripts+'/_Aktualizacja.sh '+dirscripts+'/_Update_Plugin')
                     else:
                         os.system('mv -f '+dirscripts+'/_Update_Plugin.sh '+dirscripts+'/_Update_Plugin')
                         
-                if fileExists(''+dirscripts+'/_Copying_plugin_to_other_image.sh') and GetTranslator() == 'pl_PL':
+                if fileExists(''+dirscripts+'/_Copying_plugin_to_other_image.sh') and GetTranslator() == 'pl_PL' and fileExists('/STARTUP'):
                         os.system('mv -f '+dirscripts+'/_Copying_plugin_to_other_image.sh '+dirscripts+'/_Kopiowanie_wtyczki_do_innych_image.sh')
-                if fileExists(''+dirscripts+'/_Add_Slots.sh') and GetTranslator() == 'pl_PL':
+                if fileExists(''+dirscripts+'/_Add_Slots.sh') and GetTranslator() == 'pl_PL' and fileExists('/STARTUP'):
                         os.system('mv -f '+dirscripts+'/_Add_Slots.sh '+dirscripts+'/_Dodaj_Slot.sh')
                 else:
                     if fileExists('' + dirscripts + '/Slot20.sh') or fileExists('' + dirscripts + '/Slot20-empty_Slot.sh'):
