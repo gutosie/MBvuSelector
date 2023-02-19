@@ -61,7 +61,7 @@ fi
         if [ $PL ] ; then
           echo ""
           echo "#####################################################"
-          echo "#            NEOSCRIPT ZAINSTALOWANY                #"
+          echo "#       SELECTOR MULTIBOOT ZAINSTALOWANY            #"
           echo "#####################################################"
           echo ""
         else
