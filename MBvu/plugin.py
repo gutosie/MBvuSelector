@@ -10,10 +10,10 @@ from Screens.Console import Console
 from Screens.Screen import Screen
 import os
 import sys
-from os import system
+from os import system 
 from Tools.Directories import fileExists, SCOPE_PLUGINS
 from Screens.MessageBox import MessageBox
-from Plugins.Extensions.MBvu.getinfo import getIMGmb, getIMGmbHddUsb, getCurrent, dirMB, dirIscripts, dirscripts, namber, getMovNextIMG, getHddOrUsb, getMountDevices, getS0, GetTranslator
+from Plugins.Extensions.MBvu.getinfo import getIMGmb, getIMGmbHddUsb, getCurrent, getCurrentToNine, getCurrentAfterNine, dirMB, dirIscripts, dirscripts, namber, getMovNextIMG, getHddOrUsb, getMountDevices, GetTranslator
 
 PLUGINVERSION=open('/usr/lib/enigma2/python/Plugins/Extensions/MBvu/mbvuver').read().strip().upper()           
 autoupdateplug = 'https://raw.githubusercontent.com/gutosie/MBvuSelector/master/imbvuver;'
@@ -49,50 +49,50 @@ class ScriptNeo(Screen):
                 os.system('mv -f '+dirIscripts+' '+dirscripts+'; sleep 2  ')
                 
         if GetTranslator() == 'pl_PL':
-                os.system('mv -f ' + dirscripts + '/_SlotR*.sh ' + dirscripts + '/_SlotR-Tryb_awaryjny%s.sh' % getS0() )
+                os.system('mv -f ' + dirscripts + '/_SlotR*.sh ' + dirscripts + '/_SlotR-Tryb_awaryjny%s.sh' % getCurrent() )
         else:
-                os.system('mv -f ' + dirscripts + '/_SlotR*.sh ' + dirscripts + '/_SlotR-Recovery%s.sh' % getS0() )
+                os.system('mv -f ' + dirscripts + '/_SlotR*.sh ' + dirscripts + '/_SlotR-Recovery%s.sh' % getCurrent() )
         os.system('echo "linuxrootfs1" > /tmp/linuxrootfs')
-        os.system('mv -f ' + dirscripts + '/1_Slot1*.sh ' + dirscripts + '/1_Slot1-'+getIMGmb()+'%s.sh' % getCurrent() )
+        os.system('mv -f ' + dirscripts + '/1_Slot1*.sh ' + dirscripts + '/1_Slot1-'+getIMGmb()+'%s.sh' % getCurrentToNine() )
         os.system('echo "linuxrootfs2" > /tmp/linuxrootfs') 
-        os.system('mv -f ' + dirscripts + '/2_Slot2*.sh ' + dirscripts + '/2_Slot2-' +getIMGmb()+ '%s.sh' % getCurrent() )
+        os.system('mv -f ' + dirscripts + '/2_Slot2*.sh ' + dirscripts + '/2_Slot2-' +getIMGmb()+ '%s.sh' % getCurrentToNine() )
         os.system('echo "linuxrootfs3" > /tmp/linuxrootfs')
-        os.system('mv -f ' + dirscripts + '/3_Slot3*.sh ' + dirscripts + '/3_Slot3-' + getIMGmb() + '%s.sh' %getCurrent() ) 
+        os.system('mv -f ' + dirscripts + '/3_Slot3*.sh ' + dirscripts + '/3_Slot3-' + getIMGmb() + '%s.sh' %getCurrentToNine() ) 
         if fileExists('/boot/STARTUP') :
             os.system('echo "linuxrootfs4" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/4_Slot4*.sh ' + dirscripts + '/4_Slot4-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/4_Slot4*.sh ' + dirscripts + '/4_Slot4-' + getIMGmbHddUsb() + '%s.sh' % getCurrentToNine() )
             os.system('echo "linuxrootfs5" > /tmp/linuxrootfs')  
-            os.system('mv -f ' + dirscripts + '/5_Slot5*.sh ' + dirscripts + '/5_Slot5-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/5_Slot5*.sh ' + dirscripts + '/5_Slot5-' + getIMGmbHddUsb() + '%s.sh' % getCurrentToNine() )
             os.system('echo "linuxrootfs6" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/6_Slot6*.sh ' + dirscripts + '/6_Slot6-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/6_Slot6*.sh ' + dirscripts + '/6_Slot6-' + getIMGmbHddUsb() + '%s.sh' % getCurrentToNine() )
             os.system('echo "linuxrootfs7" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/7_Slot7*.sh ' + dirscripts + '/7_Slot7-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/7_Slot7*.sh ' + dirscripts + '/7_Slot7-' + getIMGmbHddUsb() + '%s.sh' % getCurrentToNine() )
             os.system('echo "linuxrootfs8" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/8_Slot8*.sh ' + dirscripts + '/8_Slot8-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/8_Slot8*.sh ' + dirscripts + '/8_Slot8-' + getIMGmbHddUsb() + '%s.sh' % getCurrentToNine() )
             os.system('echo "linuxrootfs9" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/9_Slot9*.sh ' + dirscripts + '/9_Slot9-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/9_Slot9*.sh ' + dirscripts + '/9_Slot9-' + getIMGmbHddUsb() + '%s.sh' % getCurrentToNine() )
             os.system('echo "linuxrootfs10" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/Slot10*.sh ' + dirscripts + '/Slot10-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/Slot10*.sh ' + dirscripts + '/Slot10-' + getIMGmbHddUsb() + '%s.sh' % getCurrentAfterNine() )
             os.system('echo "linuxrootfs11" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/Slot11*.sh ' + dirscripts + '/Slot11-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/Slot11*.sh ' + dirscripts + '/Slot11-' + getIMGmbHddUsb() + '%s.sh' % getCurrentAfterNine() )
             os.system('echo "linuxrootfs12" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/Slot12*.sh ' + dirscripts + '/Slot12-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/Slot12*.sh ' + dirscripts + '/Slot12-' + getIMGmbHddUsb() + '%s.sh' % getCurrentAfterNine() )
             os.system('echo "linuxrootfs13" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/Slot13*.sh ' + dirscripts + '/Slot13-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/Slot13*.sh ' + dirscripts + '/Slot13-' + getIMGmbHddUsb() + '%s.sh' % getCurrentAfterNine() )
             os.system('echo "linuxrootfs14" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/Slot14*.sh ' + dirscripts + '/Slot14-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/Slot14*.sh ' + dirscripts + '/Slot14-' + getIMGmbHddUsb() + '%s.sh' % getCurrentAfterNine() )
             os.system('echo "linuxrootfs15" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/Slot15*.sh ' + dirscripts + '/Slot15-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/Slot15*.sh ' + dirscripts + '/Slot15-' + getIMGmbHddUsb() + '%s.sh' % getCurrentAfterNine() )
             os.system('echo "linuxrootfs16" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/Slot16*.sh ' + dirscripts + '/Slot16-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/Slot16*.sh ' + dirscripts + '/Slot16-' + getIMGmbHddUsb() + '%s.sh' % getCurrentAfterNine() )
             os.system('echo "linuxrootfs17" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/Slot17*.sh ' + dirscripts + '/Slot17-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/Slot17*.sh ' + dirscripts + '/Slot17-' + getIMGmbHddUsb() + '%s.sh' % getCurrentAfterNine() )
             os.system('echo "linuxrootfs18" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/Slot18*.sh ' + dirscripts + '/Slot18-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/Slot18*.sh ' + dirscripts + '/Slot18-' + getIMGmbHddUsb() + '%s.sh' % getCurrentAfterNine() )
             os.system('echo "linuxrootfs19" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/Slot19*.sh ' + dirscripts + '/Slot19-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )
+            os.system('mv -f ' + dirscripts + '/Slot19*.sh ' + dirscripts + '/Slot19-' + getIMGmbHddUsb() + '%s.sh' % getCurrentAfterNine() )
             os.system('echo "linuxrootfs20" > /tmp/linuxrootfs')
-            os.system('mv -f ' + dirscripts + '/Slot20*.sh ' + dirscripts + '/Slot20-' + getIMGmbHddUsb() + '%s.sh' % getCurrent() )  
+            os.system('mv -f ' + dirscripts + '/Slot20*.sh ' + dirscripts + '/Slot20-' + getIMGmbHddUsb() + '%s.sh' % getCurrentAfterNine() )  
 
         if fileExists(''+dirIscripts+''):
                 os.system('sleep 2; rm -r '+dirIscripts+' ')

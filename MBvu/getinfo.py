@@ -45,7 +45,7 @@ def getImageTeam0():
                     imageteam = 'OpenBH'          
         return imageteam
         
-def getS0():
+def getCurrent():
     try:
         slot0 = ""
         if fileExists('/boot/STARTUP'):
@@ -124,7 +124,7 @@ def getIMGmb():
                                               
         return imageteam
         
-def getCurrent():
+def getCurrentToNine():
     try:
         slotX = ""
         if fileExists('/boot/STARTUP'):
@@ -132,6 +132,22 @@ def getCurrent():
                 lines = f.read()
                 f.close()
             if lines.find(''+getROOT()+'') != -1 and not lines.find(''+namberout+'') :
+                if GetTranslator() == 'pl_PL':
+                    slotX = '---[Aktualny]'
+                else:
+                    slotX = '____'+GetTranslator()+''
+        return slotX
+    except:
+        pass
+        
+def getCurrentAfterNine():
+    try:
+        slotX = ""
+        if fileExists('/boot/STARTUP'):
+            with open('/boot/STARTUP', 'r') as f:
+                lines = f.read()
+                f.close()
+            if lines.find(''+getROOT()+'') != -1 and lines.find(''+namberout+'') :
                 if GetTranslator() == 'pl_PL':
                     slotX = '---[Aktualny]'
                 else:
