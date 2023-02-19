@@ -132,7 +132,7 @@ def getCurrentToNine():
             with open('/boot/STARTUP', 'r') as f:
                 lines = f.read()
                 f.close()
-            if lines.find(''+getROOT()+'') != -1 and not lines.find(''+namberout+'') != -1:
+            if lines.find(''+getROOT()+'') != -1 and not lines.find(''+namber+'') != -1 :
                 if GetTranslator() == 'pl_PL':
                     slotX = '---[Aktualny]'
                 else:
@@ -148,7 +148,7 @@ def getCurrentAfterNine():
             with open('/boot/STARTUP', 'r') as f:
                 lines = f.read()
                 f.close()
-            if lines.find(''+getROOT()+'') != -1 and lines.find(''+namberout+'') :
+            if lines.find(''+getROOT()+'') != -1 and lines.find(''+namberout+''):
                 if GetTranslator() == 'pl_PL':
                     slotX = '---[Aktualny]'
                 else:
