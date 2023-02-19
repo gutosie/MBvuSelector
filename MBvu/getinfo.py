@@ -233,7 +233,9 @@ def getMountDevices():
                 os.system('mkdir -p /media/usb')
             os.system('mount /dev/sdb1 /media/usb')
 
-def getMovNextIMG(): 
+def getMovNextIMG():
+    if fileExists('/linuxrootfs9/zImage'):
+        os.system('mv -f /linuxrootfs9 '+getHddOrUsb()+'/linuxrootfs9; sleep 1; ')
     if fileExists(''+getHddOrUsb()+'/linuxrootfs9/zImage'):
         if not fileExists(''+getHddOrUsb()+'/linuxrootfs10/zImage'):
             os.system('mv -f '+getHddOrUsb()+'/linuxrootfs9 '+getHddOrUsb()+'/linuxrootfs10; sleep 1; echo "kernel=/linuxrootfs10/zImage root=/dev/sda1 rootsubdir=linuxrootfs10" > /boot/STARTUP; sleep 1 ')
@@ -257,9 +259,9 @@ def getMovNextIMG():
             os.system('mv -f '+getHddOrUsb()+'/linuxrootfs9 '+getHddOrUsb()+'/linuxrootfs19; sleep 1; echo "kernel=/linuxrootfs19/zImage root=/dev/sda1 rootsubdir=linuxrootfs19" > /boot/STARTUP; sleep 1 ')
         elif not fileExists(''+getHddOrUsb()+'/linuxrootfs20/zImage'):
             os.system('mv -f '+getHddOrUsb()+'/linuxrootfs9 '+getHddOrUsb()+'/linuxrootfs20; sleep 1; echo "kernel=/linuxrootfs20/zImage root=/dev/sda1 rootsubdir=linuxrootfs20" > /boot/STARTUP; sleep 1 ')
-        elif not fileExists(''+getHddOrUsb()+'/linuxrootfs21/zImage'):
-            os.system('mv -f '+getHddOrUsb()+'/linuxrootfs9 '+getHddOrUsb()+'/linuxrootfs21; sleep 1; echo "kernel=/linuxrootfs21/zImage root=/dev/sda1 rootsubdir=linuxrootfs21" > /boot/STARTUP; sleep 1 ')
-        elif not fileExists(''+getHddOrUsb()+'/linuxrootfs22/zImage'):
-            os.system('mv -f '+getHddOrUsb()+'/linuxrootfs9 '+getHddOrUsb()+'/linuxrootfs22; sleep 1; echo "kernel=/linuxrootfs22/zImage root=/dev/sda1 rootsubdir=linuxrootfs22" > /boot/STARTUP; sleep 1 ')
+        #elif not fileExists(''+getHddOrUsb()+'/linuxrootfs21/zImage'):
+            #os.system('mv -f '+getHddOrUsb()+'/linuxrootfs9 '+getHddOrUsb()+'/linuxrootfs21; sleep 1; echo "kernel=/linuxrootfs21/zImage root=/dev/sda1 rootsubdir=linuxrootfs21" > /boot/STARTUP; sleep 1 ')
+        #elif not fileExists(''+getHddOrUsb()+'/linuxrootfs22/zImage'):
+            #os.system('mv -f '+getHddOrUsb()+'/linuxrootfs9 '+getHddOrUsb()+'/linuxrootfs22; sleep 1; echo "kernel=/linuxrootfs22/zImage root=/dev/sda1 rootsubdir=linuxrootfs22" > /boot/STARTUP; sleep 1 ')
 
 #END script gutosie
