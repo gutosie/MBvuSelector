@@ -1,0 +1,23 @@
+#!/bin/sh
+echo "*****************************************************"
+if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+  PL=1
+fi
+if [ -f /media/hdd/STARTUP ] && [ -f /media/hdd/linuxrootfs5/zImage ]  ; then
+    LocationImg=/media/hdd
+elif [ -f /media/usb/STARTUP ] && [ -f /media/usb/linuxrootfs5/zImage ]  ; then    
+    LocationImg=/media/usb
+fi
+if [ -f /boot/STARTUP_RECOVERY ] && [ -f ${LocationImg}/linuxrootfs5/zImage ] ; then
+    sleep 1
+    cp -af /boot/STARTUP_5 /boot/STARTUP
+    [ $PL ] && echo "Restart systemu !" || echo "Reboot system !"
+    echo " ";
+    echo "*****************************************************";
+    sleep 2
+    /etc/init.d/reboot    
+else
+    [ $PL ] && echo "Slot 5 jest pusty !" || echo "Slot 5 is empty !"
+    echo " "
+fi
+exit 0

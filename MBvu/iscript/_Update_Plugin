@@ -1,0 +1,110 @@
+#!/bin/sh
+#script by gutosie
+icheck='/usr/lib/enigma2/python/Plugins/Extensions/MBvu'
+PLUGINVERSION=`cat $icheck/mbvuver`
+mbvuver=`cat /tmp/imbvuver`
+UpdatePLUG='https://raw.githubusercontent.com/gutosie/neoscript/main/NeoScript/neodir/SSDhddMBvu.tar.gz'
+echo "*****************************************************"
+if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+  PL=1
+fi
+if [ -f /tmp/imbvuver ] ; then
+    if [ $mbvuver = $PLUGINVERSION ] ; then
+            [ $PL ] && echo "Wtyczka jest aktualna, spróbuj później..." || echo "The plugin is up to date.";
+            echo " "
+            echo "*****************************************************"
+            break;
+    else
+        [ $PL ] && echo ["Nowa wersja: ${mbvuver}"] || echo ["New version: $mbvuver"];
+        if [ -f /tmp/SSDhddMBvu.tar.gz ] ; then
+            rm -r /tmp/SSDhddMBvu.tar.gz
+            fi 
+        cd /tmp
+        [ $PL ] && echo "Pobieranie wtyczki z sieci..." || echo "Downloading from the web...";
+        sleep 2 
+        if [ -f /usr/bin/wget ] ; then
+            echo "________________________________";
+            sleep 2
+            #wget -q "--no-check-certificate" wget -O - -q
+            wget -q --no-check-certificate $UpdatePLUG > /dev/null 2>&1
+            if [ ! -f /tmp/SSDhddMBvu.tar.gz ] ; then
+               echo "wget nie potrafił pobrać wtyczki"
+               sleep 2
+            fi
+        fi
+        if [ ! -f /tmp/SSDhddMBvu.tar.gz ] ; then
+            if [ -f /usr/bin/curl ] ; then
+                echo "curl instaluje plugin"
+                echo "________________________________"
+                curl -O --ftp-ssl -k $UpdatePLUG > /dev/null 2>&1
+            else
+               echo "curl nie potrafił pobrać wtyczki - nie ma curl"
+               sleep 2
+            fi
+        fi
+        if [ ! -f /tmp/SSDhddMBvu.tar.gz ] ; then
+             if [ -f /usr/bin/fullwget ] ; then
+                echo "Instalacja nowej wtyczki w toku..."
+                echo "________________________________"
+                fullwget --no-check-certificate wget -q $UpdatePLUG > /dev/null 2>&1
+            else
+               echo "fullwget nie potrafił pobrać wtyczki - nie ma fullwget"
+               sleep 2
+            fi
+        fi
+        sleep 10
+        if [ -f /tmp/SSDhddMBvu.tar.gz ] ; then
+            [ $PL ] && echo "Wtyczka pobrana prawidłowo" || echo "Plugin downloaded";
+            echo "________________________________";
+            sleep 2
+            [ $PL ] && echo "Instalacja nowej wtyczki w toku..." || echo "Installing new list in progress..." ;
+            echo "________________________________" ;
+            sleep 2
+            /bin/tar -xzvf /tmp/SSDhddMBvu.tar.gz -C / > /dev/null 2>&1;    
+            sleep 1
+            echo "________________________________" ;
+            [ $PL ] && echo "Wtyczki została zaktualizowana !" || echo "Plugin updated successfully.";
+            echo "________________________________";
+            sleep 2
+            [ $PL ] && echo "Usuwanie plików instalacyjnych..." || echo "Cleaning...";
+            sleep 2
+            echo "________________________________";
+            rm -fr /tmp/SSDhddMBvu.tar.gz
+            sleep 1  
+            [ $PL ] && echo "Należy uruchomić ponownie system enigma2" || echo "Restart the receiver..";
+            mv /tmp/imbvuver /usr/lib/enigma2/python/Plugins/Extensions/MBvu/mbvuver 
+            sleep 2
+            [ $PL ] && echo "K O N I E C" || echo "F I N I S H"
+             [ $PL ] && echo "Restart interfejsu E2 za 8 sek... " || echo "Restart E2 8 sec..."
+             echo " "
+             echo "*****************************************************"
+             sleep 8
+             sync
+             killall -9 enigma2
+             exit 0 
+        else
+           echo "Wtyczk niezaktualizowana !!!"
+           echo "Nie można pobrać aktualizacji, spróbuj później..."
+           echo "*****************************************************"
+           sleep 2
+           if [ ! -f /usr/bin/curl ] ; then
+                [ $PL ] && echo "Pobieranie curl" || echo "Downloading curl";
+                sleep 2
+                [ $PL ] && echo "aktualizacja feed" || echo "update feed";
+                sleep 2
+                opkg update > /dev/null 2>&1
+                [ $PL ] && echo "Pobieranie curl" || echo "Downloading curl";
+                sleep 2
+                opkg install curl > /dev/null 2>&1
+                sleep 2
+                if [ ! -f /usr/bin/curl ] ; then
+                        [ $PL ] && echo "Nie udana instalacja curl" || echo "Installing curl error"
+                fi
+                echo "Spróbuj aktualizacji jeszcze raz..."        
+            else
+                    [ $PL ] && echo "curl jest zainstalowany" || echo "curl is installed";
+            fi
+        fi
+    fi
+fi
+exit 0
