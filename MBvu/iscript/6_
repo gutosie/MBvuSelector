@@ -8,9 +8,9 @@ if [ -f /media/hdd/STARTUP ] && [ -f /media/hdd/linuxrootfs6/zImage ]  ; then
 elif [ -f /media/usb/STARTUP ] && [ -f /media/usb/linuxrootfs6/zImage ]  ; then    
     LocationImg=/media/usb
 fi
-if [ -f /boot/STARTUP_RECOVERY ] && [ -f ${LocationImg}/linuxrootfs6/zImage ] ; then
+if [ -f /STARTUP_RECOVERY ] && [ -f ${LocationImg}/linuxrootfs6/zImage ] ; then
     sleep 1
-    cp -af /boot/STARTUP_6 /boot/STARTUP
+    cp -af /STARTUP_6 /STARTUP
     [ $PL ] && echo "Restart systemu !" || echo "Reboot system !"
     echo " ";
     echo "*****************************************************";
