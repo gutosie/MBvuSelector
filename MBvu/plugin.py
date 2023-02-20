@@ -13,7 +13,7 @@ import sys
 from os import system 
 from Tools.Directories import fileExists, SCOPE_PLUGINS
 from Screens.MessageBox import MessageBox
-from Plugins.Extensions.MBvu.getinfo import getIMGmb, getIMGmbHddUsb, getCurrent, getCurrentToNine, getCurrentAfterNine, dirMB, dirIscripts, dirscripts, namber, getMovNextIMG, getHddOrUsb, getMountDevices, GetTranslator
+from Plugins.Extensions.MBvu.getinfo import getIMGmb, getIMGmbHddUsb, getCurrent, getCurrentToNine, getCurrentAfterNine, dirMB, dirIscripts, dirscripts, namber, getMovNextIMG, getHddOrUsb, getMountDevices, GetTranslator, getImageTeam0
 
 PLUGINVERSION=open('/usr/lib/enigma2/python/Plugins/Extensions/MBvu/mbvuver').read().strip().upper()           
 autoupdateplug = 'https://raw.githubusercontent.com/gutosie/MBvuSelector/master/imbvuver;'
@@ -47,11 +47,12 @@ class ScriptNeo(Screen):
                 os.system('rm -r '+dirscripts+'/*.sh; sleep 2; mv '+dirIscripts+'/* '+dirscripts+'/; sleep 2  ')
         elif fileExists(''+dirIscripts+'') and not fileExists(''+dirscripts+''):
                 os.system('mv -f '+dirIscripts+' '+dirscripts+'; sleep 2  ')
-                
+	
+        os.system('echo "linuxrootfs0" > /tmp/linuxrootfs')       
         if GetTranslator() == 'pl_PL':
-                os.system('mv -f ' + dirscripts + '/_SlotR*.sh ' + dirscripts + '/_SlotR-Tryb_awaryjny%s.sh' % getCurrent() )
+                os.system('mv -f ' + dirscripts + '/_SlotR*.sh ' + dirscripts + '/_SlotR-'+getImageTeam0()+'-Tryb_awaryjny%s.sh' % getCurrent() )
         else:
-                os.system('mv -f ' + dirscripts + '/_SlotR*.sh ' + dirscripts + '/_SlotR-Recovery%s.sh' % getCurrent() )
+                os.system('mv -f ' + dirscripts + '/_SlotR*.sh ' + dirscripts + '/_SlotR-'+getImageTeam0()+'-Recovery%s.sh' % getCurrent() )
         os.system('echo "linuxrootfs1" > /tmp/linuxrootfs')
         os.system('mv -f ' + dirscripts + '/1_Slot1*.sh ' + dirscripts + '/1_Slot1-'+getIMGmb()+'%s.sh' % getCurrentToNine() )
         os.system('echo "linuxrootfs2" > /tmp/linuxrootfs') 
