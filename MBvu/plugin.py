@@ -170,7 +170,10 @@ def main(session, **kwargs):
     if fileExists('/STARTUP') and checkimage():
             session.open(ScriptNeo)
     else:
-            session.open(MessageBox, _('Sorry: Wrong image in flash found. You have to install in flash VuPLUS Image or back to RECOVERY Slot0.'), MessageBox.TYPE_INFO, 8)
+            if GetTranslator() == 'pl_PL':
+                    session.open(MessageBox, _('Przepraszamy: Musisz zainstalowac we flashu vu+ image, albo kexec, lub uruchom slot0 RECOVERY.'), MessageBox.TYPE_INFO, 8)
+            else:
+                    session.open(MessageBox, _('Sorry: Wrong image in flash found. You have to install in flash VuPLUS Image or back to RECOVERY Slot0.'), MessageBox.TYPE_INFO, 8)
 
 def startList(menuid):
     if menuid != 'mainmenu':
