@@ -42,9 +42,12 @@ def getImageTeam0():
         elif fileExists("/boot/etc/issue") and fileExists('/boot/STARTUP'):
             for line in open("/boot/etc/issue"):
                 if "openbh" in line:
-                    imageteam = 'OpenBH'          
+                    imageteam = 'OpenBH'
+                elif "openatv" in line:
+                    imageteam = 'openATV'
         return imageteam
-        
+    
+#Slot1-3     
 def getCurrent():
     try:
         slot0 = ""
@@ -52,7 +55,7 @@ def getCurrent():
             with open('/boot/STARTUP', 'r') as f:
                 lines = f.read()
                 f.close()
-            if lines.find('linuxrootfs0') != -1:
+            if lines.find(''+getROOT()+'') != -1 and not lines.find(''+namber+'') != -1 and not lines.find(''+namberout+'') != -1:
                 if GetTranslator() == 'pl_PL':
                     slot0 = '---[Aktualny]'
                 else:
@@ -123,7 +126,8 @@ def getIMGmb():
                     imageteam = 'VuPlus'
                                               
         return imageteam
-        
+
+#Slot4-9       
 def getCurrentToNine():
     try:
         slotX = ""
@@ -139,7 +143,8 @@ def getCurrentToNine():
         return slotX
     except:
         pass
-        
+
+#Slot10-20        
 def getCurrentAfterNine():
     try:
         slotX = ""
