@@ -167,7 +167,7 @@ def checkimage():
     return mycheck
     
 def main(session, **kwargs):
-    if fileExists('/STARTUP') and checkimage():
+    if fileExists('/boot/STARTUP') and checkimage():
             session.open(ScriptNeo)
     else:
             if GetTranslator() == 'pl_PL':
