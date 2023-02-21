@@ -30,6 +30,9 @@ class ScriptNeo(Screen):
           </widget>
 	</screen>""" % (_(''+PLUGINVERSION+''))
 	
+        if fileExists('/STARTUP_RECOVERY') and not fileExists('/boot/STARTUP_RECOVERY'): 
+                os.system(' mount / /boot')
+	
         #if fileExists('/tmp/imbvuver'):
                         #os.system('rm -r /tmp/imbvuve*')
         try:
