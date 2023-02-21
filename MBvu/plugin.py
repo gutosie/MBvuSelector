@@ -101,6 +101,8 @@ class ScriptNeo(Screen):
                         os.system('rm -f '+dirscripts+'/_Copying_plugin_to_other_image.sh')
         if not fileExists('/STARTUP') and fileExists(''+dirscripts+'/_20') :
                         os.system('sh '+dirscripts+'/_Add_Slots.sh')
+        if fileExists('/STARTUP') and fileExists('/STARTUP_9') and fileExists(''+dirscripts+'/_20') :
+                        os.system('sh '+dirscripts+'/_Add_Slots.sh')
         elif fileExists('/boot/STARTUP_20') and not fileExists(''+dirscripts+'/_20'):
                         os.system('rm -f '+dirscripts+'/_Copying_plugin_to_other_image.sh')
                 
