@@ -54,11 +54,11 @@ class ScriptNeo(Screen):
         else:
                 os.system('mv -f ' + dirscripts + '/_SlotR*.sh ' + dirscripts + '/_SlotR-'+getImageTeam0()+'-Recovery%s.sh' % getCurrent() )
         os.system('echo "linuxrootfs1" > /tmp/linuxrootfs')
-        os.system('mv -f ' + dirscripts + '/1_Slot1*.sh ' + dirscripts + '/1_Slot1-'+getIMGmb()+'%s.sh' % getCurrentToNine() )
+        os.system('mv -f ' + dirscripts + '/1_Slot1*.sh ' + dirscripts + '/1_Slot1-'+getIMGmb()+'%s.sh' % getCurrent() )
         os.system('echo "linuxrootfs2" > /tmp/linuxrootfs') 
-        os.system('mv -f ' + dirscripts + '/2_Slot2*.sh ' + dirscripts + '/2_Slot2-' +getIMGmb()+ '%s.sh' % getCurrentToNine() )
+        os.system('mv -f ' + dirscripts + '/2_Slot2*.sh ' + dirscripts + '/2_Slot2-' +getIMGmb()+ '%s.sh' % getCurrent() )
         os.system('echo "linuxrootfs3" > /tmp/linuxrootfs')
-        os.system('mv -f ' + dirscripts + '/3_Slot3*.sh ' + dirscripts + '/3_Slot3-' + getIMGmb() + '%s.sh' %getCurrentToNine() ) 
+        os.system('mv -f ' + dirscripts + '/3_Slot3*.sh ' + dirscripts + '/3_Slot3-' + getIMGmb() + '%s.sh' %getCurrent() ) 
         if fileExists('/boot/STARTUP') :
             os.system('echo "linuxrootfs4" > /tmp/linuxrootfs')
             os.system('mv -f ' + dirscripts + '/4_Slot4*.sh ' + dirscripts + '/4_Slot4-' + getIMGmbHddUsb() + '%s.sh' % getCurrentToNine() )
