@@ -5,9 +5,9 @@ if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
   PL=1
 fi
 sleep 1
-if [ -f /STARTUP_RECOVERY ] ; then
+if [ -f /boot/STARTUP_RECOVERY ] ; then
     sleep 1
-    cp -af /STARTUP_RECOVERY /boot/STARTUP
+    cp -af /boot/STARTUP_RECOVERY /boot/STARTUP
     [ $PL ] && echo "Restart systemu !" || echo "Reboot system !"
     echo " ";
     echo "*****************************************************";
