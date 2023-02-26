@@ -1,12 +1,13 @@
 #!/bin/sh
 #script by gutosie
 echo "*****************************************************"
+MODEL=$(cat /proc/stb/info/vumodel)
 PluginMB='/usr/lib/enigma2/python/Plugins/Extensions/MBvu'
 OutDir='/usr/lib/enigma2/python/Plugins/Extensions/'
 namber='4' || '5' || '6' || '7' || '8' || '9' || '10'
-if [ -f /media/hdd/STARTUP ] && [ -f /media/hdd/linuxrootfs${namber}/zImage ]  ; then
+if [ -f /media/hdd/STARTUP ] && [ -f /media/hdd/${MODEL}/linuxrootfs${namber}/zImage ]  ; then
     LocationImg=/media/hdd
-elif [ -f /media/usb/STARTUP ] && [ -f /media/usb/linuxrootfs${namber}/zImage ]  ; then    
+elif [ -f /media/usb/STARTUP ] && [ -f /media/usb/${MODEL}/linuxrootfs${namber}/zImage ]  ; then    
     LocationImg=/media/usb
 fi
 if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
