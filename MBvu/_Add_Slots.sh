@@ -1,18 +1,10 @@
 #!/bin/sh
 #script by gutosie
-#blkid -c /dev/null /dev/sd* > ${dirscripts}/uuid;
-#blkid -c /dev/sda1 | grep UUID
-#uuidsda1=$(blkid -s UUID -o value /dev/sda1)
-
 UUIDSD=$(cat /tmp/slotsx/sdXY)
-#blkid -s UUID -o value /dev/sdb1 > /tmp/sdb1
-
 dirscripts=/usr/lib/enigma2/python/Plugins/Extensions/MBvu/script
 namber='4' || '5' || '6' || '7' || '8' || '9' || '10' || '11' || '12' || '13' || '14' || '15' || '16' || '17' || '18' || '19' || '20'
-
 MODEL=$(cat /proc/stb/info/vumodel)
-
-    
+   
 echo "*****************************************************"
 if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
   PL=1
@@ -39,44 +31,28 @@ else
             if [ -f /STARTUP ] ; then
                     sleep 1
             fi
-            #if LocationImg=/media/hdd; then  
-                #echo "kernel=${MODEL}/linuxrootfs8/zImage root=UUID=${uuidsda1} rootsubdir=${MODEL}/linuxrootfs8 rootwait=40" > /boot/STARTUP_8 > /dev/null 2>&1
-                #echo "kernel=${MODEL}/linuxrootfs9/zImage root=UUID=${uuidsda1} rootsubdir=${MODEL}/linuxrootfs9 rootwait=40" > /boot/STARTUP_9 > /dev/null 2>&1
-            #else
-                #echo "kernel=${MODEL}/linuxrootfs8/zImage root=UUID=${uuidsdb1} rootsubdir=${MODEL}/linuxrootfs8 rootwait=40" > /boot/STARTUP_8 > /dev/null 2>&1
-                #echo "kernel=${MODEL}/linuxrootfs9/zImage root=UUID=${uuidsdb1} rootsubdir=${MODEL}/linuxrootfs9 rootwait=40" > /boot/STARTUP_9 > /dev/null 2>&1
-            #fi
             
-            
+            echo "kernel=${MODEL}/linuxrootfs4/zImage root=UUID=${UUIDSD} rootsubdir=$MODEL/linuxrootfs4 rootwait=40" > /boot/STARTUP_4 
+            echo "kernel=${MODEL}/linuxrootfs5/zImage root=UUID=${UUIDSD} rootsubdir=$MODEL/linuxrootfs5 rootwait=40" > /boot/STARTUP_5 
+            echo "kernel=${MODEL}/linuxrootfs6/zImage root=UUID=${UUIDSD} rootsubdir=$MODEL/linuxrootfs6 rootwait=40" > /boot/STARTUP_6 
+            echo "kernel=${MODEL}/linuxrootfs7/zImage root=UUID=${UUIDSD} rootsubdir=$MODEL/linuxrootfs7 rootwait=40" > /boot/STARTUP_7 
             echo "kernel=${MODEL}/linuxrootfs8/zImage root=UUID=${UUIDSD} rootsubdir=$MODEL/linuxrootfs8 rootwait=40" > /boot/STARTUP_8 
-            echo "kernel=${MODEL}/linuxrootfs9/zImage root=UUID=${UUIDSD} rootsubdir=$MODEL/linuxrootfs9 rootwait=40" > /boot/STARTUP_9 
-            #echo "kernel=${MODEL}/linuxrootfs10/zImage root=UUID=${uuidsda1} rootsubdir=${MODEL}/linuxrootfs10 rootwait=40" > /boot/STARTUP_10
-            #echo "kernel=${MODEL}/linuxrootfs11/zImage root=UUID=${uuidsda1} rootsubdir=${MODEL}/linuxrootfs11 rootwait=40" > /boot/STARTUP_11
-            #echo "kernel=${MODEL}/linuxrootfs12/zImage root=UUID=${uuidsda1} rootsubdir=${MODEL}/linuxrootfs12 rootwait=40" > /boot/STARTUP_12
-            #echo "kernel=${MODEL}/linuxrootfs13/zImage root=UUID=${uuidsda1} rootsubdir=${MODEL}/linuxrootfs13 rootwait=40" > /boot/STARTUP_13
-            
-            #echo "kernel=/linuxrootfs4/zImage root=/dev/sda1 rootsubdir=linuxrootfs4" > /boot/STARTUP_4
-            #echo "kernel=/linuxrootfs5/zImage root=/dev/sda1 rootsubdir=linuxrootfs5" > /boot/STARTUP_5
-            #echo "kernel=/linuxrootfs6/zImage root=/dev/sda1 rootsubdir=linuxrootfs6" > /boot/STARTUP_6
-            #echo "kernel=/linuxrootfs7/zImage root=/dev/sda1 rootsubdir=linuxrootfs7" > /boot/STARTUP_7
-            #echo "kernel=/linuxrootfs8/zImage root=/dev/sda1 rootsubdir=linuxrootfs8" > /boot/STARTUP_8
-            #echo "kernel=/linuxrootfs9/zImage root=/dev/sda1 rootsubdir=linuxrootfs9" > /boot/STARTUP_9
-            #echo "kernel=/linuxrootfs10/zImage root=/dev/sda1 rootsubdir=linuxrootfs10" > /boot/STARTUP_10
-            #echo "kernel=/linuxrootfs11/zImage root=/dev/sda1 rootsubdir=linuxrootfs11" > /boot/STARTUP_11
-            #echo "kernel=/linuxrootfs12/zImage root=/dev/sda1 rootsubdir=linuxrootfs12" > /boot/STARTUP_12
-            #echo "kernel=/linuxrootfs13/zImage root=/dev/sda1 rootsubdir=linuxrootfs13" > /boot/STARTUP_13
-            #echo "kernel=/linuxrootfs14/zImage root=/dev/sda1 rootsubdir=linuxrootfs14" > /boot/STARTUP_14
-            #echo "kernel=/linuxrootfs15/zImage root=/dev/sda1 rootsubdir=linuxrootfs15" > /boot/STARTUP_15
-            #echo "kernel=/linuxrootfs16/zImage root=/dev/sda1 rootsubdir=linuxrootfs16" > /boot/STARTUP_16
-            #echo "kernel=/linuxrootfs17/zImage root=/dev/sda1 rootsubdir=linuxrootfs17" > /boot/STARTUP_17
-            #echo "kernel=/linuxrootfs18/zImage root=/dev/sda1 rootsubdir=linuxrootfs18" > /boot/STARTUP_18
-            #echo "kernel=/linuxrootfs19/zImage root=/dev/sda1 rootsubdir=linuxrootfs19" > /boot/STARTUP_19
-            #echo "kernel=/linuxrootfs20/zImage root=/dev/sda1 rootsubdir=linuxrootfs20" > /boot/STARTUP_20
+            echo "kernel=${MODEL}/linuxrootfs9/zImage root=UUID=${UUIDSD} rootsubdir=$MODEL/linuxrootfs9 rootwait=40" > /boot/STARTUP_9
+#ponizszych slots, za slot9, nie ma potrzeby dodawac
+            #echo "kernel=${MODEL}/linuxrootfs10/zImage root=UUID=$${UUIDSD} rootsubdir=${MODEL}/linuxrootfs10 rootwait=40" > /boot/STARTUP_10
+            #echo "kernel=${MODEL}/linuxrootfs11/zImage root=UUID=$${UUIDSD} rootsubdir=${MODEL}/linuxrootfs11 rootwait=40" > /boot/STARTUP_11
+            #echo "kernel=${MODEL}/linuxrootfs12/zImage root=UUID=$${UUIDSD} rootsubdir=${MODEL}/linuxrootfs12 rootwait=40" > /boot/STARTUP_12
+            #echo "kernel=${MODEL}/linuxrootfs13/zImage root=UUID=$${UUIDSD} rootsubdir=${MODEL}/linuxrootfs13 rootwait=40" > /boot/STARTUP_13
+            #echo "kernel=${MODEL}/linuxrootfs14/zImage root=UUID=$${UUIDSD} rootsubdir=${MODEL}/linuxrootfs14 rootwait=40" > /boot/STARTUP_14
+            #echo "kernel=${MODEL}/linuxrootfs15/zImage root=UUID=$${UUIDSD} rootsubdir=${MODEL}/linuxrootfs15 rootwait=40" > /boot/STARTUP_15
+            #echo "kernel=${MODEL}/linuxrootfs16/zImage root=UUID=$${UUIDSD} rootsubdir=${MODEL}/linuxrootfs16 rootwait=40" > /boot/STARTUP_16
+            #echo "kernel=${MODEL}/linuxrootfs17/zImage root=UUID=$${UUIDSD} rootsubdir=${MODEL}/linuxrootfs17 rootwait=40" > /boot/STARTUP_17
+            #echo "kernel=${MODEL}/linuxrootfs18/zImage root=UUID=$${UUIDSD} rootsubdir=${MODEL}/linuxrootfs18 rootwait=40" > /boot/STARTUP_18
+            #echo "kernel=${MODEL}/linuxrootfs19/zImage root=UUID=$${UUIDSD} rootsubdir=${MODEL}/linuxrootfs19 rootwait=40" > /boot/STARTUP_19
+            #echo "kernel=${MODEL}/linuxrootfs20/zImage root=UUID=$${UUIDSD} rootsubdir=${MODEL}/linuxrootfs20 rootwait=40" > /boot/STARTUP_20
+
             if [ -f /STARTUP ] ; then
                     sleep 1
-            fi
-            if [ -f /tmp/slotsx ] ; then
-                            rm -r /tmp/slotsx
             fi
             echo "Slot20 <<<";
     fi
@@ -112,6 +88,7 @@ else
                     fi
                     echo " "
                     echo "*****************************************************"
+                    rm -r /tmp/slotsx
                     killall -9 enigma2;  
     else
                     [ $PL ] && echo "Dodatkowe slot 4 -> 20 dodane." || echo "Slots 4 -> 20 exist."

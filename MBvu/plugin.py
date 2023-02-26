@@ -121,24 +121,17 @@ class ScriptNeo(Screen):
                 os.system('sleep 2; rm -r '+dirIscripts+' ')
         if not fileExists('/STARTUP') and fileExists(''+dirscripts+'/_Copying_plugin_to_other_image.sh'):
                         os.system('rm -f '+dirscripts+'/_Copying_plugin_to_other_image.sh')
-        if not fileExists('/STARTUP') and fileExists(''+dirscripts+'/_20') :
-                        os.system('sh '+dirscripts+'/_Add_Slots.sh')
-        if fileExists('/STARTUP') and fileExists('/STARTUP_9') and fileExists(''+dirscripts+'/_20') :
-                        os.system('sh '+dirscripts+'/_Add_Slots.sh')
         elif fileExists('/boot/STARTUP_20') and not fileExists(''+dirscripts+'/_20'):
                         os.system('rm -f '+dirscripts+'/_Copying_plugin_to_other_image.sh')
                 
-        os.system('chmod 755 '+dirscripts+'/*.sh')
+        os.system('chmod 755 '+dirscripts+'/*.sh; chmod 755 '+dirMB+'/_Add_Slots.sh')
                 
 #>HDD
         def hddslots(self):
             os.system('mkdir /tmp/slotsx; touch /tmp/slotsx/addhdd; blkid /dev/sda1 > /tmp/slotsx/sda1; blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/usda; blkid /dev/sdb1 > /tmp/slotsx/sdb1; blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/usdb;')
             getResultMount()
             if fileExists('/media/hdd') and fileExists('/STARTUP'):
-                    try:
-                        os.system('sh '+dirscripts+'/_Dodaj_Slot.sh')
-                    except:
-                        os.system('sh '+dirscripts+'/_Add_Slots.sh')
+                        os.system('sh '+dirMB+'/_Add_Slots.sh')
             else:
                     self.myClose(_('Sorry, Slots can be installed or upgraded only when booted from Slot0 Recovery'))
                     
@@ -147,10 +140,7 @@ class ScriptNeo(Screen):
             os.system('mkdir /tmp/slotsx; touch /tmp/slotsx/addusb; blkid /dev/sda1 > /tmp/slotsx/sda1; blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/usda; blkid /dev/sdb1 > /tmp/slotsx/sdb1; blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/usdb;')
             getResultMount()
             if fileExists('/media/usb') and fileExists('/STARTUP'):
-                    try:
-                                os.system('sh '+dirscripts+'/_Dodaj_Slot.sh')
-                    except:
-                                os.system('sh '+dirscripts+'/_Add_Slots.sh')
+                                os.system('sh '+dirMB+'/_Add_Slots.sh')
             else:
                     self.myClose(_('Sorry, Slots can be installed or upgraded only when booted from Slot0 Recovery'))
 
@@ -168,16 +158,6 @@ class ScriptNeo(Screen):
                         
                 if fileExists(''+dirscripts+'/_Copying_plugin_to_other_image.sh') and GetTranslator() == 'pl_PL' and fileExists('/STARTUP'):
                         os.system('mv -f '+dirscripts+'/_Copying_plugin_to_other_image.sh '+dirscripts+'/_Kopiowanie_wtyczki_do_innych_image.sh')
-                if fileExists(''+dirscripts+'/_Add_Slots.sh') and GetTranslator() == 'pl_PL' and fileExists('/STARTUP'):
-                        os.system('mv -f '+dirscripts+'/_Add_Slots.sh '+dirscripts+'/_Dodaj_Slot.sh')
-                else:
-                    if fileExists('' + dirscripts + '/Slot20.sh') or fileExists('' + dirscripts + '/Slot20-empty_Slot.sh'):
-                        try:
-                            os.system('rm -f '+dirscripts+'/_Dodaj_Slot.sh')
-                        except:
-                            os.system('rm -f '+dirscripts+'/_Add_Next_Slots.sh')
-                                
-                        
                 try:
                         list = listdir("/usr/lib/enigma2/python/Plugins/Extensions/MBvu/script/")
                         list.sort()
