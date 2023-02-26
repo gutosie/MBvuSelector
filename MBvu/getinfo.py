@@ -5,13 +5,52 @@
 import sys
 import os
 from Tools.Directories import fileExists, SCOPE_PLUGINS
-
 dirMB='/usr/lib/enigma2/python/Plugins/Extensions/MBvu'
 dirscripts='/usr/lib/enigma2/python/Plugins/Extensions/MBvu/script'
 dirIscripts='/usr/lib/enigma2/python/Plugins/Extensions/MBvu/iscript'
 namber='4' or '5' or '6' or '7' or '8' or '9' or '10' or '11' or '12' or '13' or '14' or '15' or '16' or '17' or '18' or '19' or '20' #itd.. add
 namberout = '10' or '11' or '12' or '13' or '14' or '15' or '16' or '17' or '18' or '19' or '20' 
 
+def usda():
+    try:
+        if os.path.exists('/tmp/slotsx/usda'):
+            with open('/tmp/slotsx/usda', 'r') as f:
+                myuuid = f.readline().strip()
+                f.close()
+        return myuuid 
+    except:
+        pass
+    
+def usdb():
+    try:
+        if os.path.exists('/tmp/slotsx/usdb'):
+            with open('/tmp/slotsx/usdb', 'r') as f:
+                myuuid = f.readline().strip()
+                f.close()
+        return myuuid 
+    except:
+        pass
+
+
+def getResultMount():
+    if os.path.exists('/tmp/slotsx/addhdd'):
+            for line in open('/tmp/slotsx/sda1'):     
+                if "hdd" in line and usda() in line :
+                    os.system('blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/sdXY')
+                    
+            for line1 in open('/tmp/slotsx/sdb1'):     
+                        if "hdd" in line1 and usdb() in line1 :
+                            os.system('blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/sdXY')
+                    
+    elif os.path.exists('/tmp/slotsx/addusb'):
+            for line in open('/tmp/slotsx/sda1'):     
+                if "usb" in line and usda() in line :
+                    os.system('blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/sdXY')
+                    
+            for line1 in open('/tmp/slotsx/sdb1'):     
+                        if "usb" in line1 and usdb() in line1 :
+                            os.system('blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/sdXY')
+    
 def getROOT():
     try:
         if os.path.exists('/tmp/linuxrootfs'):

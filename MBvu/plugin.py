@@ -4,6 +4,7 @@
 ##
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
+from Components.Label import Label
 from os import listdir
 from Plugins.Plugin import PluginDescriptor
 from Screens.Console import Console
@@ -13,7 +14,7 @@ import sys
 from os import system 
 from Tools.Directories import fileExists, SCOPE_PLUGINS
 from Screens.MessageBox import MessageBox
-from Plugins.Extensions.MBvu.getinfo import getIMGmb, getIMGmbHddUsb, getCurrent, getCurrentToNine, getCurrentAfterNine, dirMB, dirIscripts, dirscripts, namber, getMovNextIMG, getHddOrUsb, getMountDevices, GetTranslator, getImageTeam0
+from Plugins.Extensions.MBvu.getinfo import getIMGmb, getIMGmbHddUsb, getCurrent, getCurrentToNine, getCurrentAfterNine, dirMB, dirIscripts, dirscripts, namber, getMovNextIMG, getHddOrUsb, getMountDevices, GetTranslator, getImageTeam0, getResultMount
 
 PLUGINVERSION=open('/usr/lib/enigma2/python/Plugins/Extensions/MBvu/mbvuver').read().strip().upper()           
 autoupdateplug = 'https://raw.githubusercontent.com/gutosie/MBvuSelector/master/imbvuver;'
@@ -22,19 +23,37 @@ try:
 except:
     mbvuver=PLUGINVERSION
 
+
+
 class ScriptNeo(Screen):
         skin = """
-	<screen position="center,center" size="930,555" title="Select SLOT Image       Plug ver.: %s">   
-            <widget name="list" itemHeight="44" font="Regular;35" position="center,center" zPosition="1" size="870,500" scrollbarMode="showOnDemand" transparent="1">
+	<screen position="center,center" size="1060,625" title="Select SLOT Image       Plug ver.: %s">
+            <widget name="list" itemHeight="44" font="Regular;35" position="center,center" zPosition="1" size="870,480" scrollbarMode="showOnDemand" transparent="1">
             <convert type="StringList" font="Regular;70" />
-          </widget>
-	</screen>""" % (_(''+PLUGINVERSION+''))
-	
+            </widget>
+            <widget name="key_red" position="35,575" zPosition="2" size="510,40" font="Regular;30" halign="left" valign="center" backgroundColor="red" transparent="1" />
+            <widget name="key_yellow" position="545,575" zPosition="2" size="510,40" font="Regular;30" halign="left" valign="center" backgroundColor="yellow" transparent="1" />
+	</screen>"""% (_(''+PLUGINVERSION+''))
+
+        def __init__(self, session, args=None):
+                Screen.__init__(self, session)
+                self.session = session
+                self["list"] = MenuList([])
+                if not fileExists('/boot/STARTUP_9') and fileExists(''+dirscripts+'/_20'):
+                    self['key_red'] = Label(_('Press red - Add slots on HDD'))
+                    self['key_yellow'] = Label(_('Press yellow - Add slots on USB'))
+                self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], {'red': self.hddslots,
+                 'yellow': self.usbslots,
+                 "ok": self.run, 
+                 "cancel": self.close}, -1)
+                self.onLayoutFinish.append(self.loadScriptList)
+
+
         if fileExists('/STARTUP_RECOVERY') and not fileExists('/boot/STARTUP_RECOVERY'): 
                 os.system(' mount / /boot')
 	
-        #if fileExists('/tmp/imbvuver'):
-                        #os.system('rm -r /tmp/imbvuve*')
+        if fileExists('/tmp/imbvuver'):
+                        os.system('rm -r /tmp/imbvuve*')
         try:
                 os.system('cd /tmp; wget -q --no-check-certificate '+autoupdateplug+'')
         except:
@@ -110,14 +129,31 @@ class ScriptNeo(Screen):
                         os.system('rm -f '+dirscripts+'/_Copying_plugin_to_other_image.sh')
                 
         os.system('chmod 755 '+dirscripts+'/*.sh')
-                         
-        def __init__(self, session, args=None):
-                Screen.__init__(self, session)
-                self.session = session
-                self["list"] = MenuList([])
-                self["actions"] = ActionMap(["OkCancelActions"], {"ok": self.run, "cancel": self.close}, -1)
-                self.onLayoutFinish.append(self.loadScriptList)
                 
+#>HDD
+        def hddslots(self):
+            os.system('mkdir /tmp/slotsx; touch /tmp/slotsx/addhdd; blkid /dev/sda1 > /tmp/slotsx/sda1; blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/usda; blkid /dev/sdb1 > /tmp/slotsx/sdb1; blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/usdb;')
+            getResultMount()
+            if fileExists('/media/hdd') and fileExists('/STARTUP'):
+                    try:
+                        os.system('sh '+dirscripts+'/_Dodaj_Slot.sh')
+                    except:
+                        os.system('sh '+dirscripts+'/_Add_Slots.sh')
+            else:
+                    self.myClose(_('Sorry, Slots can be installed or upgraded only when booted from Slot0 Recovery'))
+                    
+#>USB            
+        def usbslots(self):
+            os.system('mkdir /tmp/slotsx; touch /tmp/slotsx/addusb; blkid /dev/sda1 > /tmp/slotsx/sda1; blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/usda; blkid /dev/sdb1 > /tmp/slotsx/sdb1; blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/usdb;')
+            getResultMount()
+            if fileExists('/media/usb') and fileExists('/STARTUP'):
+                    try:
+                                os.system('sh '+dirscripts+'/_Dodaj_Slot.sh')
+                    except:
+                                os.system('sh '+dirscripts+'/_Add_Slots.sh')
+            else:
+                    self.myClose(_('Sorry, Slots can be installed or upgraded only when booted from Slot0 Recovery'))
+
         def loadScriptList(self):
                 if fileExists('/tmp/imbvuver') and PLUGINVERSION != mbvuver:
                     if GetTranslator() == 'pl_PL' and fileExists('/STARTUP'):
@@ -163,6 +199,10 @@ class ScriptNeo(Screen):
                 
                 self.session.open(Console, title, cmdlist=[script])
 			
+        def myClose(self, message):
+            self.session.open(MessageBox, message, MessageBox.TYPE_INFO)
+            self.close()
+
 def checkimage():
     mycheck = False
     if fileExists('/proc/stb/info/vumodel') and not fileExists('/proc/stb/info/boxtype'):
