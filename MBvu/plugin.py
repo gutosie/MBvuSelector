@@ -39,7 +39,7 @@ class ScriptNeo(Screen):
                 Screen.__init__(self, session)
                 self.session = session
                 self["list"] = MenuList([])
-                if not fileExists('/boot/STARTUP_9') and fileExists(''+dirscripts+'/_20'):
+                if not fileExists('/boot/STARTUP_9') or fileExists(''+dirscripts+'/_20'):
                     self['key_red'] = Label(_('Press red - Add slots on HDD'))
                     self['key_yellow'] = Label(_('Press yellow - Add slots on USB'))
                 self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], {'red': self.hddslots,
