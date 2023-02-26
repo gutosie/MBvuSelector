@@ -11,6 +11,16 @@ dirIscripts='/usr/lib/enigma2/python/Plugins/Extensions/MBvu/iscript'
 namber='4' or '5' or '6' or '7' or '8' or '9' or '10' or '11' or '12' or '13' or '14' or '15' or '16' or '17' or '18' or '19' or '20' #itd.. add
 namberout = '10' or '11' or '12' or '13' or '14' or '15' or '16' or '17' or '18' or '19' or '20' 
 
+def getVU():
+    try:
+        if os.path.exists('/proc/stb/info/vumodel'):
+            with open('/proc/stb/info/vumodel', 'r') as f:
+                mymodel = f.readline().strip()
+                f.close()
+        return mymodel 
+    except:
+        pass
+
 def usda():
     try:
         if os.path.exists('/tmp/slotsx/usda'):
@@ -52,14 +62,11 @@ def getResultMount():
                             os.system('blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/sdXY')
     
 def getROOT():
-    try:
         if os.path.exists('/tmp/linuxrootfs'):
             with open('/tmp/linuxrootfs', 'r') as f:
                 myboxEXT = f.readline().strip()
                 f.close()
         return myboxEXT 
-    except:
-        pass
 
 def getUnknownImage():
                     if fileExists('/boot/'+getROOT()+'/etc/issue'):
@@ -174,7 +181,12 @@ def getCurrentToNine():
             with open('/boot/STARTUP', 'r') as f:
                 lines = f.read()
                 f.close()
-            if lines.find(''+getROOT()+'') != -1 and not lines.find(''+namber+'') != -1 :
+            if lines.find(''+getROOT()+'') != -1 and lines.find(''+namberout+''):
+                if GetTranslator() == 'pl_PL':
+                    slotX = '---[Aktualny]'
+                else:
+                    slotX = '____'+GetTranslator()+''
+            elif lines.find(''+getROOT()+'') != -1 :
                 if GetTranslator() == 'pl_PL':
                     slotX = '---[Aktualny]'
                 else:
@@ -192,6 +204,11 @@ def getCurrentAfterNine():
                 lines = f.read()
                 f.close()
             if lines.find(''+getROOT()+'') != -1 and lines.find(''+namberout+''):
+                if GetTranslator() == 'pl_PL':
+                    slotX = '---[Aktualny]'
+                else:
+                    slotX = '____'+GetTranslator()+''
+            elif lines.find(''+getROOT()+'') != -1:
                 if GetTranslator() == 'pl_PL':
                     slotX = '---[Aktualny]'
                 else:
@@ -272,11 +289,11 @@ def GetTranslator():
     return imglang
 
 def getHddOrUsb():
-    locatino = '/media/hdd'
-    if fileExists('/media/hdd/STARTUP') and fileExists('/media/hdd/linuxrootfs'+namber+'/zImage'):
-            locatino = '/media/hdd'
-    elif fileExists('/media/usb/STARTUP') and fileExists('/media/usb/linuxrootfs'+namber+'/zImage'):
-            locatino = '/media/usb'
+    locatino = '/media/hdd/'+getVU()+''
+    if fileExists('/media/hdd/STARTUP') and fileExists('/media/hdd/'+getVU()+'linuxrootfs'+namber+'/zImage'):
+            locatino = '/media/hdd/'+getVU()+''
+    elif fileExists('/media/usb/STARTUP') and fileExists('/media/usb/'+getVU()+'linuxrootfs'+namber+'/zImage'):
+            locatino = '/media/usb/'+getVU()+''
     return locatino
 
 def getMountDevices(): 
