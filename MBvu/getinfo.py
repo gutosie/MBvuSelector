@@ -39,6 +39,7 @@ def getGiveLabel():
                         os.system('e2label /dev/sdb1 usb')
                         
     return os.system('touch /tmp/.ilabel; killall -9 enigma2')
+    #df -ih /dev/sda1 > /tmp/file #df -ih /dev/sdb1 > /tmp/file #df -a /dev/sda1|grep hdd
 
 def getVU():
     try:
