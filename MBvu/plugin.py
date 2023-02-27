@@ -39,8 +39,9 @@ class ScriptNeo(Screen):
                 Screen.__init__(self, session)
                 self.session = session
                 self["list"] = MenuList([])
-                if not fileExists('/boot/STARTUP_9') or fileExists(''+dirscripts+'/_20'):
+                if not fileExists('/boot/STARTUP_9') or fileExists(''+dirscripts+'/_20') or fileExists('/tmp/.ilabel') and fileExists('/media/hdd') :
                     self['key_red'] = Label(_('Press red - Add slots on HDD'))
+                if not fileExists('/boot/STARTUP_9') or fileExists(''+dirscripts+'/_20') or fileExists('/tmp/.ilabel') and fileExists('/media/usb') :
                     self['key_yellow'] = Label(_('Press yellow - Add slots on USB'))
                 self["actions"] = ActionMap(["OkCancelActions", "ColorActions"], {'red': self.hddslots,
                  'yellow': self.usbslots,
@@ -132,16 +133,16 @@ class ScriptNeo(Screen):
                 
 #>HDD
         def hddslots(self):
-            os.system('mkdir /tmp/slotsx; touch /tmp/slotsx/addhdd; blkid /dev/sda1 > /tmp/slotsx/sda1; blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/usda; blkid /dev/sdb1 > /tmp/slotsx/sdb1; blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/usdb;')
+            os.system('mkdir /tmp/slotsx; touch /tmp/slotsx/addhdd; blkid /dev/sda1 > /tmp/slotsx/sda1; blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/usda; blkid /dev/sdb1 > /tmp/slotsx/sdb1; blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/usdb; df -h | grep ^/dev/sda1 > /tmp/slotsx/labelsda1; df -h | grep ^/dev/sdb1 > /tmp/slotsx/labelsdb1;')
             getResultMount()
             if fileExists('/media/hdd'):
                         os.system('sh '+dirMB+'/_Add_Slots.sh')
             else:
                     self.myClose(_('Sorry, Slots can be installed or upgraded only when booted from Slot0 Recovery'))
-                    
+                                  
 #>USB            
         def usbslots(self):
-            os.system('mkdir /tmp/slotsx; touch /tmp/slotsx/addusb; blkid /dev/sda1 > /tmp/slotsx/sda1; blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/usda; blkid /dev/sdb1 > /tmp/slotsx/sdb1; blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/usdb;')
+            os.system('mkdir /tmp/slotsx; touch /tmp/slotsx/addusb; blkid /dev/sda1 > /tmp/slotsx/sda1; blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/usda; blkid /dev/sdb1 > /tmp/slotsx/sdb1; blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/usdb; df -h | grep ^/dev/sda1 > /tmp/slotsx/labelsda1; df -h | grep ^/dev/sdb1 > /tmp/slotsx/labelsdb1;')
             getResultMount()
             if fileExists('/media/usb'):
                                 os.system('sh '+dirMB+'/_Add_Slots.sh')

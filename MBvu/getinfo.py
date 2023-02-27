@@ -11,6 +11,35 @@ dirIscripts='/usr/lib/enigma2/python/Plugins/Extensions/MBvu/iscript'
 namber='4' or '5' or '6' or '7' or '8' or '9' or '10' or '11' or '12' or '13' or '14' or '15' or '16' or '17' or '18' or '19' or '20' #itd.. add
 namberout = '10' or '11' or '12' or '13' or '14' or '15' or '16' or '17' or '18' or '19' or '20' 
 
+
+def getGiveLabel():
+    if os.path.exists('/tmp/slotsx/labelsda1') or os.path.exists('/tmp/slotsx/labelsdb1'):          
+            for line in open('/tmp/slotsx/labelsda1'):     
+                if "sda1" in line and "hdd" in line :
+                    try:
+                        os.system('tune2fs -L hdd /dev/sda1')
+                    except:
+                        os.system('e2label /dev/sda1 hdd')
+                elif "sda1" in line and "usb" in line :
+                    try:
+                        os.system('tune2fs -L usb /dev/sda1')
+                    except:
+                        os.system('e2label /dev/sda1 usb')
+                    
+            for line1 in open('/tmp/slotsx/labelsdb1'):     
+                if "sdb1" in line1 and "hdd" in line1 :
+                    try:
+                        os.system('tune2fs -L hdd /dev/sdb1')
+                    except:
+                        os.system('e2label /dev/sdb1 hdd')
+                elif "sdb1" in line1 and "usb" in line1 :
+                    try:
+                        os.system('tune2fs -L usb /dev/sdb1')
+                    except:
+                        os.system('e2label /dev/sdb1 usb')
+                        
+    return os.system('touch /tmp/.ilabel; killall -9 enigma2')
+
 def getVU():
     try:
         if os.path.exists('/proc/stb/info/vumodel'):
@@ -41,25 +70,34 @@ def usdb():
     except:
         pass
 
-
+# if not lines.find('LABEL') != -1
 def getResultMount():
     if os.path.exists('/tmp/slotsx/addhdd'):
-            for line in open('/tmp/slotsx/sda1'):     
-                if "hdd" in line and usda() in line :
-                    os.system('blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/sdXY')
+            for line in open('/tmp/slotsx/sda1'):
+                if "LABEL" not in line: 
+                        getGiveLabel()     
+                elif "hdd" in line and usda() in line :
+                        os.system('blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/sdXY')
                     
-            for line1 in open('/tmp/slotsx/sdb1'):     
-                        if "hdd" in line1 and usdb() in line1 :
-                            os.system('blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/sdXY')
+            for line1 in open('/tmp/slotsx/sdb1'):
+                if "LABEL" not in line1:
+                        getGiveLabel()     
+                elif "hdd" in line1 and usdb() in line1 :
+                        os.system('blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/sdXY')
                     
     elif os.path.exists('/tmp/slotsx/addusb'):
-            for line in open('/tmp/slotsx/sda1'):     
-                if "usb" in line and usda() in line :
-                    os.system('blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/sdXY')
+            for line in open('/tmp/slotsx/sda1'):
+                if "LABEL" not in line:
+                        getGiveLabel()
+                elif "usb" in line and usda() in line :
+                        os.system('blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/sdXY')
                     
-            for line1 in open('/tmp/slotsx/sdb1'):     
-                        if "usb" in line1 and usdb() in line1 :
-                            os.system('blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/sdXY')
+            for line1 in open('/tmp/slotsx/sdb1'):
+                if "LABEL" not in line1:
+                        getGiveLabel()     
+                elif "usb" in line1 and usdb() in line1 :
+                        os.system('blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/sdXY')
+                        
     
 def getROOT():
         if os.path.exists('/tmp/linuxrootfs'):

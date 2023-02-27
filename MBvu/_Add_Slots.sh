@@ -88,7 +88,12 @@ else
                     fi
                     echo " "
                     echo "*****************************************************"
-                    rm -r /tmp/slotsx
+                    if [ -f /tmp/slotsx ] ; then
+                        rm -r /tmp/slotsx
+                    fi
+                    if [ -f /tmp/.ilabel ] ; then
+                        rm -f /tmp/.ilabel
+                    fi
                     killall -9 enigma2;  
     else
                     [ $PL ] && echo "Dodatkowe slot 4 -> 20 dodane." || echo "Slots 4 -> 20 exist."
