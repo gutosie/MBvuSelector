@@ -25,7 +25,7 @@ else
         LocationImg=/media/hdd   
     fi
     
-    if [ -f ${dirscripts}/_20 ] && [ -f /STARTUP_RECOVERY ]  ; then            
+    if [ ! -f /STARTUP_9 ] && [ -f /STARTUP_RECOVERY ]  ; then            
             echo " "
             echo "Solt4 >>>";
             if [ -f /STARTUP ] ; then
@@ -38,7 +38,7 @@ else
             echo "kernel=${MODEL}/linuxrootfs7/zImage root=UUID=${UUIDSD} rootsubdir=$MODEL/linuxrootfs7 rootwait=40" > /boot/STARTUP_7 
             echo "kernel=${MODEL}/linuxrootfs8/zImage root=UUID=${UUIDSD} rootsubdir=$MODEL/linuxrootfs8 rootwait=40" > /boot/STARTUP_8 
             echo "kernel=${MODEL}/linuxrootfs9/zImage root=UUID=${UUIDSD} rootsubdir=$MODEL/linuxrootfs9 rootwait=40" > /boot/STARTUP_9
-#ponizszych slots, za slot9, nie ma potrzeby dodawac
+            # slots, after slot9, no need to add
             #echo "kernel=${MODEL}/linuxrootfs10/zImage root=UUID=$${UUIDSD} rootsubdir=${MODEL}/linuxrootfs10 rootwait=40" > /boot/STARTUP_10
             #echo "kernel=${MODEL}/linuxrootfs11/zImage root=UUID=$${UUIDSD} rootsubdir=${MODEL}/linuxrootfs11 rootwait=40" > /boot/STARTUP_11
             #echo "kernel=${MODEL}/linuxrootfs12/zImage root=UUID=$${UUIDSD} rootsubdir=${MODEL}/linuxrootfs12 rootwait=40" > /boot/STARTUP_12
