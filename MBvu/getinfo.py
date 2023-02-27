@@ -101,7 +101,7 @@ def getCurrent():
             with open('/boot/STARTUP', 'r') as f:
                 lines = f.read()
                 f.close()
-            if lines.find(''+getROOT()+'') != -1 and not lines.find(''+namber+'') != -1 and not lines.find(''+namberout+'') != -1:
+            if lines.find(''+getROOT()+'') != -1 and not lines.find('linuxrootfs11') != -1 and not lines.find('linuxrootfs12') != -1 and not lines.find('linuxrootfs13') != -1:
                 if GetTranslator() == 'pl_PL':
                     slot0 = '---[Aktualny]'
                 else:
