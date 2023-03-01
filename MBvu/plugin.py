@@ -133,21 +133,21 @@ class ScriptNeo(Screen):
                 
 #>HDD
         def hddslots(self):
-            os.system('mkdir /tmp/slotsx; touch /tmp/slotsx/addhdd; blkid /dev/sda1 > /tmp/slotsx/sda1; blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/usda; blkid /dev/sdb1 > /tmp/slotsx/sdb1; blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/usdb; df -h | grep ^/dev/sda1 > /tmp/slotsx/labelsda1; df -h | grep ^/dev/sdb1 > /tmp/slotsx/labelsdb1;')
-            getResultMount()
-            if fileExists('/media/hdd'):
-                        os.system('sh '+dirMB+'/_Add_Slots.sh')
-            else:
-                    self.myClose(_('Sorry, Slots can be installed or upgraded only when booted from Slot0 Recovery'))
-                                  
-#>USB            
-        def usbslots(self):
-            os.system('mkdir /tmp/slotsx; touch /tmp/slotsx/addusb; blkid /dev/sda1 > /tmp/slotsx/sda1; blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/usda; blkid /dev/sdb1 > /tmp/slotsx/sdb1; blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/usdb; df -h | grep ^/dev/sda1 > /tmp/slotsx/labelsda1; df -h | grep ^/dev/sdb1 > /tmp/slotsx/labelsdb1;')
-            getResultMount()
-            if fileExists('/media/usb'):
+            if fileExists('/media/hdd') and fileExists('/STARTUP'):
+                                os.system('mkdir /tmp/slotsx; touch /tmp/slotsx/addhdd; blkid /dev/sda1 > /tmp/slotsx/sda1; blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/usda; blkid /dev/sdb1 > /tmp/slotsx/sdb1; blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/usdb; df -h | grep ^/dev/sda1 > /tmp/slotsx/labelsda1; df -h | grep ^/dev/sdb1 > /tmp/slotsx/labelsdb1;')
+                                getResultMount()
                                 os.system('sh '+dirMB+'/_Add_Slots.sh')
             else:
-                    self.myClose(_('Sorry, Slots can be installed or upgraded only when booted from Slot0 Recovery'))
+                                self.myClose(_('Sorry, Slots can be installed or upgraded only when booted from Slot0 Recovery or slots exists'))
+                                  
+#>USB
+        def usbslots(self):
+            if fileExists('/media/usb') and fileExists('/STARTUP'):
+                                os.system('mkdir /tmp/slotsx; touch /tmp/slotsx/addusb; blkid /dev/sda1 > /tmp/slotsx/sda1; blkid -s UUID -o value /dev/sda1 > /tmp/slotsx/usda; blkid /dev/sdb1 > /tmp/slotsx/sdb1; blkid -s UUID -o value /dev/sdb1 > /tmp/slotsx/usdb; df -h | grep ^/dev/sda1 > /tmp/slotsx/labelsda1; df -h | grep ^/dev/sdb1 > /tmp/slotsx/labelsdb1;')
+                                getResultMount()
+                                os.system('sh '+dirMB+'/_Add_Slots.sh')
+            else:
+                                self.myClose(_('Sorry, Slots can be installed or upgraded only when booted from Slot0 Recovery or slots exists'))
 
         def loadScriptList(self):
                 if fileExists('/tmp/imbvuver') and PLUGINVERSION != mbvuver:
