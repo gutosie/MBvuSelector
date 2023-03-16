@@ -1,0 +1,24 @@
+#!/bin/sh
+MODEL=$(cat /proc/stb/info/vumodel)
+echo "*****************************************************"
+if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
+  PL=1
+fi
+if [ -f /media/hdd/STARTUP ] && [ -f /media/hdd/${MODEL}/linuxrootfs17/zImage ]  ; then
+    LocationImg=/media/hdd
+elif [ -f /media/usb/STARTUP ] && [ -f /media/usb/${MODEL}/linuxrootfs17/zImage ]  ; then    
+    LocationImg=/media/usb
+fi
+if [ -f /boot/STARTUP_RECOVERY ] && [ -f ${LocationImg}/${MODEL}/linuxrootfs17/zImage ] ; then
+    sleep 1
+    echo "kernel=/linuxrootfs17/zImage root=/dev/sda1 rootsubdir=linuxrootfs17" > /boot/STARTUP
+    [ $PL ] && echo "Restart systemu !" || echo "Reboot system !"
+    echo " ";
+    echo "*****************************************************";
+    sleep 2
+    /etc/init.d/reboot    
+else
+    [ $PL ] && echo "Slot 17 jest pusty !" || echo "Slot 17 is empty !"
+    echo " "
+fi
+exit 0
