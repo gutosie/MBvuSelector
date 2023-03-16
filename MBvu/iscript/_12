@@ -1,14 +1,15 @@
 #!/bin/sh
+MODEL=$(cat /proc/stb/info/vumodel)
 echo "*****************************************************"
 if `grep -q 'osd.language=pl_PL' </etc/enigma2/settings`; then
   PL=1
 fi
-if [ -f /media/hdd/STARTUP ] && [ -f /media/hdd/linuxrootfs13/zImage ]  ; then
+if [ -f /media/hdd/STARTUP ] && [ -f /media/hdd/${MODEL}/linuxrootfs13/zImage ]  ; then
     LocationImg=/media/hdd
-elif [ -f /media/usb/STARTUP ] && [ -f /media/usb/linuxrootfs13/zImage ]  ; then    
+elif [ -f /media/usb/STARTUP ] && [ -f /media/usb/${MODEL}/linuxrootfs13/zImage ]  ; then    
     LocationImg=/media/usb
 fi
-if [ -f /boot/STARTUP_RECOVERY ] && [ -f ${LocationImg}/linuxrootfs13/zImage ] ; then
+if [ -f /boot/STARTUP_RECOVERY ] && [ -f ${LocationImg}/${MODEL}/linuxrootfs13/zImage ] ; then
     sleep 1
     echo "kernel=/linuxrootfs12/zImage root=/dev/sda1 rootsubdir=linuxrootfs12" > /boot/STARTUP
     [ $PL ] && echo "Restart systemu !" || echo "Reboot system !"
